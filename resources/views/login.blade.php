@@ -20,17 +20,29 @@
                 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
                     <h2 class="text-2xl font-semibold text-center mb-6"><u>Login</u></h2>
                     <div class="mb-4">
-                        <a href="https://github.com/login" target="_blank" class="w-full py-3 px-[135px] bg-black text-white rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500">GitHub</a>
+                        <a href="https://github.com/login" target="_blank" class="w-full py-3 px-[135px] bg-black text-white rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500">
+                            GitHub</a>
                     </div>
                     <h1 class="font-bold text-center">OR</h1>
-                    <form action="/login-page" method="post">
+
+                    @if (session('status'))
+                    <div class='font-medium text-sm text-green-600 mb-4'>
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
                         <div class="mb-4">
-                            <label for="username" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required
-                                class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" name="email" placeholder="Enter your username" class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required autofocus autocomplete="username">
+                            @error('email')
+                            <ul class='mt-2 text-sm text-red-600 space-y-1'>
+                                <li>{{ $message }}</li>
+                            </ul>
+                            @enderror
                         </div>
                         <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            Login
+                            Register
                         </button>
                     </form>
                 </div>
